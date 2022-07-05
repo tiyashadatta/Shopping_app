@@ -17,25 +17,43 @@ public class ProductServiceImpl implements ProductService{
         return product;
     }
 
-    public Product updateproduct(int productId, Product product) {
-        List<Product> updatedProduct = list.stream().map((p) -> {
+    public Product updateproduct(int productId, Product newProduct) {
+        List<Product> updatedList = list.stream().map(p -> {
             if (p.getProductId() == productId) {
-                p.setProductName(product.getProductName());
+                //updated product
+                p.setProductName(newProduct.getProductName());
+                p.setProductDesc(newProduct.getProductDesc());
+                p.setProductPrice(newProduct.getProductPrice());
+                p.setAvailable(newProduct.isAvailable());
+
                 return p;
-            }else{
+            } else {
                 return p;
             }
         }).collect(Collectors.toList());
-        list= updatedProduct;
-        return product;
+
+        list = updatedList;
+        newProduct.setProductId(productId);
+        return newProduct;
+
     }
 
     public void deleteproduct(int productId) {
-
+        List<Product> newList = list.
+                stream().
+                filter(p -> p.getProductId() != productId).
+                collect(Collectors.toList());
+        list = newList;
     }
 
     public Product getproductbyId(int productId) {
-        return null;
+        Product product = list.
+                stream().
+                filter(p -> p.getProductId() == productId).
+                findFirst().
+                get();
+        System.out.println(product.getProductName());
+        return product;
     }
 
     public List<Product> getproducts() {
