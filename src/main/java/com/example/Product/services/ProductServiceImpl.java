@@ -12,12 +12,12 @@ public class ProductServiceImpl implements ProductService{
 
     List<Product> list = new ArrayList<>();
 
-    public Product createproduct(Product product) {
+    public Product createProduct(Product product) {
         list.add(product);
         return product;
     }
 
-    public Product updateproduct(int productId, Product newProduct) {
+    public Product updateProduct(int productId, Product newProduct) {
         List<Product> updatedList = list.stream().map(p -> {
             if (p.getProductId() == productId) {
                 //updated product
@@ -38,7 +38,7 @@ public class ProductServiceImpl implements ProductService{
 
     }
 
-    public void deleteproduct(int productId) {
+    public void deleteProduct(int productId) {
         List<Product> newList = list.
                 stream().
                 filter(p -> p.getProductId() != productId).
@@ -46,7 +46,7 @@ public class ProductServiceImpl implements ProductService{
         list = newList;
     }
 
-    public Product getproductbyId(int productId) {
+    public Product getProductById(int productId) {
         Product product = list.
                 stream().
                 filter(p -> p.getProductId() == productId).
@@ -56,7 +56,7 @@ public class ProductServiceImpl implements ProductService{
         return product;
     }
 
-    public List<Product> getproducts() {
+    public List<Product> getProducts() {
         return list;
     }
 }

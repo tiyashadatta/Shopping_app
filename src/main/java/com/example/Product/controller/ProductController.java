@@ -15,32 +15,33 @@ public class ProductController {
     ProductService productService;
 
     @RequestMapping(value = "/create-product", method = RequestMethod.POST)
-    public Product createproduct(@RequestBody Product product){
-        Product createdProduct = productService.createproduct(product);
+    public Product createProduct(@RequestBody Product product){
+        Product createdProduct = productService.createProduct(product);
         System.out.println("Product created");
         return createdProduct;
     }
 
     @RequestMapping(value = "/update-product/{productId}", method = RequestMethod.PUT)
-    public Product updateproduct(@PathVariable int productId, @RequestBody Product product){
-        Product updatedProduct = productService.updateproduct(productId, product);
+    public Product updateProduct(@PathVariable int productId, @RequestBody Product product){
+        Product updatedProduct = productService.updateProduct(productId, product);
         return updatedProduct;
     }
 
     @RequestMapping(value = "/get-productbyID/{productId}", method = RequestMethod.GET)
-    public Product getproduct(int productId){
-        Product fetchedProduct = productService.getproductbyId(productId);
+    public Product getProduct(@PathVariable int productId){
+        Product fetchedProduct = productService.getProductById(productId);
         return fetchedProduct;
     }
 
     @RequestMapping(value = "/get-products", method = RequestMethod.GET)
-    public List<Product> getproducts(){
-        List<Product> allProducts = productService.getproducts();
+    public List<Product> getProducts(){
+        List<Product> allProducts = productService.getProducts();
         return allProducts;
     }
 
     @RequestMapping(value = "/delete-product/{productId}", method = RequestMethod.DELETE)
-    public void deleteproduct(int productId){
-        productService.deleteproduct(productId);
+    public String deleteProduct(@PathVariable int productId){
+        productService.deleteProduct(productId);
+        return "Product deleted successfully";
     }
 }
